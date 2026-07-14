@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Dcard 移動萬事屋｜國立臺北科技大學</title>
-<meta name="description" content="Dcard 移動萬事屋校園巡迴活動，國立臺北科技大學站，9/7（一）～9/8（三）" />
+<meta name="description" content="Dcard 移動萬事屋校園巡迴活動，國立臺北科技大學站，9/7（一）～9/8（二）" />
 <style>
   * { box-sizing: border-box; }
   body {
@@ -199,7 +199,7 @@
     <header>
       <div class="badge">🎮 Dcard 移動萬事屋</div>
       <h1>勇者冒險 萬事有解</h1>
-      <p>國立臺北科技大學．新生開學迎新活動</p>
+      <p>國立臺北科技大學．校園開學活動</p>
     </header>
   </div>
 
@@ -214,14 +214,14 @@
           <div class="info-icon">📍</div>
           <div>
             <div class="info-label">活動地點</div>
-            <div class="info-value">國立臺北科技大學</div>
+            <div class="info-value">國立臺北科技大學 - 人文廣場（圖書館前）</div>
           </div>
         </div>
         <div class="info-item time">
           <div class="info-icon">📅</div>
           <div>
             <div class="info-label">活動時間</div>
-            <div class="info-value">9/7（一）～ 9/8（三）</div>
+            <div class="info-value">9/7（一）～ 9/8（二）</div>
           </div>
         </div>
       </div>
@@ -273,10 +273,11 @@
       btn.innerHTML = showing ? '收起介紹 ▴' : '看更多活動介紹 ▾';
     }
 
-    // Poster image is stored as base64 text in assets/poster.webp.b64
-    // (kept as plain text in the repo so it survives Git reliably),
-    // decoded here into a Blob and rendered into the <img>.
-    fetch('assets/poster.webp.b64')
+    // Poster image is stored as base64 text in assets/poster.jpg.b64
+    // (kept as plain text in the repo so it survives Git reliably, at full
+    // original quality — no recompression), decoded here into a Blob and
+    // rendered into the <img>.
+    fetch('assets/poster.jpg.b64')
       .then(function (res) { return res.text(); })
       .then(function (b64) {
         var binary = atob(b64);
@@ -284,7 +285,7 @@
         for (var i = 0; i < binary.length; i++) {
           bytes[i] = binary.charCodeAt(i);
         }
-        var blob = new Blob([bytes], { type: 'image/webp' });
+        var blob = new Blob([bytes], { type: 'image/jpeg' });
         document.getElementById('posterImg').src = URL.createObjectURL(blob);
       })
       .catch(function () {
