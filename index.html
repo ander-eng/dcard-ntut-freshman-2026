@@ -78,6 +78,7 @@
     display: flex;
     justify-content: center;
     padding: 20px;
+    min-height: 120px;
   }
   .poster-wrap img {
     width: 100%;
@@ -205,7 +206,7 @@
   <main>
     <div class="card">
       <div class="poster-wrap">
-        <img src="https://entrydesk-api.dcard.io/f/g6tQCcry7FHODhjY" alt="Dcard 移動萬事屋 臺北科技大學 新生宣傳單" />
+        <img id="posterImg" src="" alt="Dcard 移動萬事屋 臺北科技大學 新生宣傳單" />
       </div>
 
       <div class="info-grid">
@@ -271,6 +272,25 @@
       var showing = el.classList.toggle('show');
       btn.innerHTML = showing ? '收起介紹 ▴' : '看更多活動介紹 ▾';
     }
+
+    // Poster image is stored as base64 text in assets/poster.webp.b64
+    // (kept as plain text in the repo so it survives Git reliably),
+    // decoded here into a Blob and rendered into the <img>.
+    fetch('assets/poster.webp.b64')
+      .then(function (res) { return res.text(); })
+      .then(function (b64) {
+        var binary = atob(b64);
+        var bytes = new Uint8Array(binary.length);
+        for (var i = 0; i < binary.length; i++) {
+          bytes[i] = binary.charCodeAt(i);
+        }
+        var blob = new Blob([bytes], { type: 'image/webp' });
+        document.getElementById('posterImg').src = URL.createObjectURL(blob);
+      })
+      .catch(function () {
+        var img = document.getElementById('posterImg');
+        img.alt = '圖片載入失敗';
+      });
   </script>
 </body>
 </html>
